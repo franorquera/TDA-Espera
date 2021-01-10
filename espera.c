@@ -58,8 +58,10 @@ bool guardar_urgente(esp_t* esp, void *valor) {
 }
 
 bool guardar_regular(esp_t* esp, const char *clave, void *dato) {
+    bool pertenece = abb_pertenece(esp->abb_regular, clave);
     bool todo_ok = abb_guardar(esp->abb_regular, clave, dato);
-    if (todo_ok) esp->cant++;
+    
+    if (todo_ok && !pertenece) esp->cant++;
     return todo_ok;
 }
 
